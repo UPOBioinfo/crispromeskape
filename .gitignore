@@ -1,0 +1,16 @@
+/klebsiella/
+/acinetobacter/
+/output/
+*.pdf
+*.ods
+*.png
+*.bin
+*.odp
+*.zip
+.Rproj.user
+*.Rproj
+*.RData
+*.Rhistory
+*.tree
+*.AB_DEF_MAX
+/figures/
