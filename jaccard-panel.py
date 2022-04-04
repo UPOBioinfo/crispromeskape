@@ -187,7 +187,7 @@ for idx, s in enumerate(species):
     data_MLST = data_MLST.loc[common_mlst,common_mlst]
     # flatten, flat mlst data for jaccard is already available (data_MLST_nonsquare)
     ab_phylogenic_distance_flat = squareform(ab_phylogenic_distance)
-    # data_MLST_nonsquare = squareform(data_MLST)
+    data_MLST_nonsquare = squareform(data_MLST)
 
     _pearsonr = pearsonr(data_MLST_nonsquare,
                            ab_phylogenic_distance_flat)
