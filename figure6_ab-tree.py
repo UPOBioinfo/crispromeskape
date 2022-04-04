@@ -1,3 +1,12 @@
+"""
+This script computes the jaccard distance between the MLST groups of a. baumanii. 
+The MLST groups are condensed from all strains that are marked as the respectiuve group,
+for each gene the majority vote of all corresponding strands appoints the genes status.
+of these distances and the phylogenetic distances of the strains a hierarchical clustering
+is performed and plotted as a dendrogram, which was used for figure6.
+They latter need to be provided in the subfolder "/phylogenetic trees/"
+@Author: Maximilian Sprang, Github: Muedi
+"""
 # %%
 # jaccard index/distance
 from itertools import combinations
@@ -121,7 +130,6 @@ for s in species:
     unique_combis = ["No_crispr"] + unique_combis
     unique_combis = {unique_combis[i]:i for i in range(len(unique_combis))}
 
-
     my_palette = colors.ListedColormap(colors_rgb[1:len(unique_combis)+1])
 
     _linkages = ['ward']
@@ -153,8 +161,7 @@ for s in species:
                             edgecolor=my_palette(unique_combis[mlst_map.loc[label.strip()]]))
                             )
 
-            # legend_elements = [Patch(facecolor=my_palette(0), label='No Crispr (<1)'),
-            #                    Patch(facecolor=my_palette(1), label='Has Crispr (>=1)')]
+            # add legend
             legend_elements = [Patch(facecolor=my_palette(unique_combis[key]), label=key) for key in unique_combis.keys()]
             ax.legend(handles=legend_elements, loc='upper left')
             #plt.show()

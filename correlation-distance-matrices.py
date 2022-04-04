@@ -98,7 +98,7 @@ for s, ax in zip(species, axs.ravel()):
     # plot preprocessing
     df_ml = pd.DataFrame({"mlsts": ab_jaccard_distance_flat.index.to_list(),
                           "Jaccard distance": ab_jaccard_distance_flat,
-                          "phylogenetic distance": ab_phylogenic_distance_flat,
+                          "Phylogenetic distance": ab_phylogenic_distance_flat,
                           })
     df_ml["Crispr-Status"] = ["Both Crispr" if (mlst_map[x[0][3:]] != "No_crispr" and mlst_map[x[1][3:]] != "No_crispr") else "One Crispr" if (
         mlst_map[x[0][3:]] != "No_crispr" or mlst_map[x[1][3:]] != "No_crispr") else "None Crispr" for x in df_ml.mlsts.to_list()]
