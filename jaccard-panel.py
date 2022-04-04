@@ -85,13 +85,7 @@ for idx, s in enumerate(species):
 
         #pairwise distance
         data_MLST = pairwise_distances(
-            condensed_data.values, metric='jaccard', n_jobs=4)
-
-        # for combi in combis_mlst:
-        #     jacc_dis = distance.jaccard(majority_c0, majority_c1)
-        #     data_MLST[combi[0]][combi[1]] = jacc_dis
-        #     data_MLST[combi[1]][combi[0]] = jacc_dis
-        #     break
+            condensed_data.values, metric='jaccard', n_jobs=n_cores)
         data_MLST_nonsquare = squareform(data_MLST)
         data_MLST = pd.DataFrame(
             data_MLST, index=condensed_data.index, columns=condensed_data.index)
@@ -102,16 +96,10 @@ for idx, s in enumerate(species):
             "output/{}_jacc_dissimilaity_MLST.csv".format(s), index_col=0)
         data_MLST_nonsquare = squareform(data_MLST)
 
-    # dendro
-    # get mapping of mlst and crispr, if True the mlst group contains at least one Crispr strain
-    # mlst_map = meta.groupby('MLST').count()['CRISPRtype'] >= 1
-    # mlst_map = mlst_map.loc[data_MLST.index]
-    # mlst_map = mlst_map.astype(int) #change to numeric for palette
-    # my_palette = plt.cm.get_cmap("Accent", 2) # two colors crispr or not
-    # # my_color = mlst_map.codes
-# %%
     # color mapping for single crispr types
-    #get df with true false for crispr type with types as index and mlst as cols
+    # If multiple are present they are split into a list of strings
+    # Ambigous strains need to be dropped as in the jaccard script.
+    # get df with true false for crispr type with types as index and mlst as cols (test)
     test = meta.drop("Ambiguous", axis=1)
     test["crispr_clean"] = test.CRISPRtype.str.split(",")
     test = test.explode("crispr_clean")
@@ -124,8 +112,6 @@ for idx, s in enumerate(species):
         test[mlst].loc[test[mlst].eq(True)].index.values for mlst in test.columns]
     mlst_map = mlst_map.astype(str)
     #simplify crispr types
-    # mlst_map_blanko = [x if x == "No_crispr" else "" for x in mlst_map]
-    # mlst_map_blanko = pd.Series(mlst_map_blanko, index=mlst_map.index)
     for mlst in mlst_map.index:
         if mlst_map[mlst] == "No_crispr":
             pass
@@ -148,13 +134,10 @@ for idx, s in enumerate(species):
         else:
             print("No hardcoded case!")
             pass
-    # mlst_map = mlst_map_blanko
     unique_combis_local = list(set(mlst_map))
     unique_combis_local.remove("No_crispr")
     unique_combis_local = ["No_crispr"] + unique_combis_local
     unique_combis_local = {unique_combis_local[i]:i for i in range(len(unique_combis_local))}
-
-
     # my_palette = colors.ListedColormap(colors_rgb[1:len(unique_combis)+1])
 
     _linkages = ['ward']
@@ -188,9 +171,8 @@ for idx, s in enumerate(species):
                             facecolor=my_palette(unique_combis[mlst_map.loc[label.strip()]]),
                             edgecolor=my_palette(unique_combis[mlst_map.loc[label.strip()]]))
                             )
-            # legend_elements = [Patch(facecolor=my_palette(0), label='No Crispr (<1)'),
-            #                    Patch(facecolor=my_palette(1), label='Has Crispr (>=1)')]
-            legend_elements = [Patch(facecolor=my_palette(unique_combis[key]), label=key) for key in unique_combis_local.keys()]
+            # legend for unique elements in this tree
+            # legend_elements = [Patch(facecolor=my_palette(unique_combis[key]), label=key) for key in unique_combis_local.keys()]
             # ax.legend(handles=legend_elements, loc='upper left')
             #plt.show()
             fig.savefig("output/dendro_{}_{}-linkage.svg".format(s, _linkage), dpi=300)
@@ -215,7 +197,7 @@ for idx, s in enumerate(species):
     data_MLST = data_MLST.loc[common_mlst,common_mlst]
     # flatten, flat mlst data for jaccard is already available (data_MLST_nonsquare)
     ab_phylogenic_distance_flat = squareform(ab_phylogenic_distance)
-    data_MLST_nonsquare = squareform(data_MLST)
+    # data_MLST_nonsquare = squareform(data_MLST)
 
     _pearsonr = pearsonr(data_MLST_nonsquare,
                            ab_phylogenic_distance_flat)
@@ -249,18 +231,14 @@ for idx, s in enumerate(species):
             ylbls = ax.get_ymajorticklabels()
             for lbl in ylbls:
                 label = lbl.get_text()
-                # lbl.set_backgroundcolor(my_palette(mlst_map.loc[label]))
-                # feed label to map to dict, to get number for palette
-                # lbl.set_backgroundcolor(my_palette(
-                #     unique_combis[mlst_map.loc[label.strip()]]))
                 lbl.set_size(3)
                 lbl.set_bbox(dict(pad=0.0,
                             facecolor=my_palette(unique_combis[mlst_map.loc[label.strip()]]),
                             edgecolor=my_palette(unique_combis[mlst_map.loc[label.strip()]]))
-                            )            # legend_elements = [Patch(facecolor=my_palette(0), label='No Crispr (<1)'),
-            #                    Patch(facecolor=my_palette(1), label='Has Crispr (>=1)')]
-            legend_elements = [Patch(facecolor=my_palette(
-                unique_combis[key]), label=key) for key in unique_combis_local.keys()]
+                            )
+            # legend for unique elements in this tree
+            # legend_elements = [Patch(facecolor=my_palette(
+            #     unique_combis[key]), label=key) for key in unique_combis_local.keys()]
             # ax.legend(handles=legend_elements, loc='upper left')
             #plt.show()
 
@@ -269,7 +247,7 @@ for ax, col in zip(axs[1], species):
 
 for ax, row in zip(axs[:,0], ["Phylogeny (MLST)", "Gene profile"]):
     ax.set_ylabel(row, rotation=90, size='xx-large')
-
+# apply legend for all unique elements
 legend_elements = [Patch(facecolor=my_palette(
                 unique_combis[key]), label=key) for key in unique_combis.keys()]
 axs[0, 0].legend(handles=legend_elements, loc='lower left')

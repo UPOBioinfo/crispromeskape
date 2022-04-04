@@ -16,14 +16,6 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 
-
-# %%
-
-
-def drop_prefix(self, prefix):
-    self.columns = self.columns.str.lstrip(prefix)
-    return self
-pd.core.frame.DataFrame.drop_prefix = drop_prefix
 # %%from matplotlib import colors
 names = {
     "ec":"E. cloacae",
@@ -82,6 +74,7 @@ for s, ax in zip(species, axs.ravel()):
     # the block below does some cosmetics on the crispr names
     # If multiple are present they are split into a list of strings
     # Ambigous strains need to be dropped as in the jaccard script.
+    # get df with true false for crispr type with types as index and mlst as cols (test)
     test = meta.drop("Ambiguous", axis=1)
     test["crispr_clean"] = test.CRISPRtype.str.split(",")
     test = test.explode("crispr_clean")
@@ -139,7 +132,6 @@ for s, ax in zip(species, axs.ravel()):
     ax.set_xlabel("Phylogenetic distance")
     ax.set_title("$\it{}$ (corr = {})".format(name, np.round(_pearsonr[0], 2)))
     # fig.savefig("output/{}_jacc-vs-phylo-lmplot-linear.svg".format(s))
-    gc.collect()
 
 handles = [Patch(color=sns_palette[key], label=key) for key in sns_palette.keys()]
 axs[1, 2].legend(handles=handles, loc="lower right")
