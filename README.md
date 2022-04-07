@@ -8,6 +8,13 @@ Add some text to describe the project.
 
 
 ## Python scripts
+Package versions:
+matplotlib 3.5.0
+numpy 1.19.2
+pandas 1.3.5
+scikit-learn 1.0.2
+scipy 1.6.2
+seaborn 0.11.2
 ### Random forest inference
 The script utilizes scikit-learns mean decrease in impurity feature importance measre to infer genes that set crispr containing strains apart from those without crispr systems. Cas-genes have been removed in the data, to allow to detect non Crispr-Cas related genes. 
 ### Jaccard distances
