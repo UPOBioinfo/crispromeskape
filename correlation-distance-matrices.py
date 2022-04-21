@@ -100,13 +100,13 @@ for s, ax in zip(species, axs.ravel()):
                           "Jaccard distance": ab_jaccard_distance_flat,
                           "Phylogenetic distance": ab_phylogenic_distance_flat,
                           })
-    df_ml["Crispr-Status"] = ["Both Crispr-Cas" if (mlst_map[x[0][3:]] != "No_crispr" and mlst_map[x[1][3:]] != "No_crispr") else "One Crispr-Cas" if (
-        mlst_map[x[0][3:]] != "No_crispr" or mlst_map[x[1][3:]] != "No_crispr") else "None Crispr-Cas" for x in df_ml.mlsts.to_list()]
+    df_ml["Crispr-Status"] = ["Both CRISPR-Cas" if (mlst_map[x[0][3:]] != "No_crispr" and mlst_map[x[1][3:]] != "No_crispr") else "One CRISPR-Cas" if (
+        mlst_map[x[0][3:]] != "No_crispr" or mlst_map[x[1][3:]] != "No_crispr") else "None CRISPR-Cas" for x in df_ml.mlsts.to_list()]
     # TODO: use mlsts list of groups to index mlst_map and get info if one or both of the mlsts contains a crispr group
     # plot
-    sns_palette = {"One Crispr-Cas": colors_hex[1],
-                   "None Crispr-Cas": colors_hex[2],
-                   "Both Crispr-Cas": colors_hex[3]}
+    sns_palette = {"One CRISPR-Cas": colors_hex[1],
+                   "None CRISPR-Cas": colors_hex[2],
+                   "Both CRISPR-Cas": colors_hex[3]}
     # sns_rgb = {"One Crispr": colors_rgb[1], 
     #                "None Crispr": colors_rgb[2],
     #                "Both Crispr": colors_rgb[3]}
