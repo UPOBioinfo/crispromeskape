@@ -1,18 +1,17 @@
-# AJPerez, 2022
 library(topGO)
 library(RColorBrewer)
 library(tidyverse)
 library(ggpubr)
 
-setwd("/home/ajperez/nc/ncbidatasets/max/")
-mybreaks1 = c(1, 1.0e-1, 1.0e-2, 1.0e-3, 1.0e-4, 1.0e-5, 1.0e-6, 1.0e-7, 0)
-mybreaks2 = c(1, 1.0e-2, 1.0e-4, 1.0e-6, 1.0e-8, 1.0e-10, 0)
-mybreaks3 = c(1, 1.0e-1, 1.0e-2, 1.0e-3, 1.0e-4, 1.0e-5, 1.0e-6, 1.0e-7, 0)
+setwd("./")
+mybreaks1 = c(1, 1.0e-1, 1.0e-2, 1.0e-3, 1.0e-4, 1.0e-5, 1.0e-6, 1.0e-7, 0) #C
+mybreaks2 = c(1, 1.0e-2, 1.0e-4, 1.0e-6, 1.0e-8, 1.0e-10, 0) # P
+mybreaks3 = c(1, 1.0e-1, 1.0e-2, 1.0e-3, 1.0e-4, 1.0e-5, 1.0e-6, 1.0e-7, 0) #F
 
-GO_PARAM1 <- "CC"     # CC | BP | MF
-GO_PARAM2 <- "C"      # C | P | F
-MYBREAKS <- mybreaks1 # mybreaks1 | mybreaks2 | mybreaks3
-MAX <- 1e-7           # 1e-6(CC) | 1e-12(BP) | 1e-7(MF) Change mybreak123 above
+GO_PARAM1 <- "MF"     # CC | BP | MF
+GO_PARAM2 <- "F"      # C | P | F
+MYBREAKS <- mybreaks3 # mybreaks1 | mybreaks2 | mybreaks3
+MAX <- 1e-7           # 1e-7(CC) | 1e-10(BP) | 1e-7(MF) Change mybreak123 above
 
 fig <- list()
 mylabels <- list()
@@ -61,7 +60,6 @@ for (pre in c("ab_I-Fa", "ab_I-Fb", "ec_I-F", "ef_II-A", "kp_I-E", "pa_I-F", "pa
   
   # Different palettes
   palette <- c("#F52A2A", "#D561EA", "#61B0EA", "#47CD30", "#E89B57", "#E4EA61", "white") # alternative palette
-  #palette <- c("#F52A2A", "#D561EA", "#61B0EA", "#E4EA61", "white")
   myPalette <- colorRampPalette(rev(brewer.pal(9, "YlOrRd")))
   
   # Figure
@@ -74,7 +72,7 @@ for (pre in c("ab_I-Fa", "ab_I-Fb", "ec_I-F", "ef_II-A", "kp_I-E", "pa_I-F", "pa
   max_value <- as.integer(max(-log(pvalue)))+1
   pv_range <- exp(-seq(max_value, 0, -1))
   allRes <- mutate(allRes, plot_id = paste(GO.ID, Term, sep = " - "))
-  
+
 ###  
   pvalue <- as.numeric(gsub("<", "", allRes$classicFisher)) # remove '<' symbols
   allRes$classicFisher <- pvalue
@@ -124,7 +122,7 @@ out <- ggarrange(fig[["ef_II-A"]], fig[["sa_III-A"]], legend,
                    "E. faecium (II-A)", "S. aureus (III-A)", "",
                    "K. pneumoniae (I-E)", "A. baumannii (I-Fa)","A. baumannii (I-Fb)",
                    "P. aeruginosa (I-C)","P. aeruginosa (I-E)", "P. aeruginosa (I-F)",
-                   "E. cloacae (I-F)", "P. aeruginosa (V-A1)", "K. pneumoniae (kp_IV-A3)"
+                   "E. cloacae (I-F)", "P. aeruginosa (IV-A1)", "K. pneumoniae (kp_IV-A3)"
                  ), vjust = 1.8, hjust = -0.1,
                  font.label = list(size = 16, color = "#000276", face = c("bold.italic")), nrow = 4, ncol = 3)
 
