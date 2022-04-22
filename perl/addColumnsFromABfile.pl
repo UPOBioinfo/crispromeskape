@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Creates an output with several columns to add to the metadata table, from a list of files, each with a list of IDs.
+
 use strict;
 
 my ($F, @f) = @ARGV; # File with all IDs in the first colum (only IDs that we want; ./prokka/mapping_ids.tsv), and files with lists of IDs

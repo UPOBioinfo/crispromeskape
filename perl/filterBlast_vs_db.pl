@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Filter Blast hits with a given identity and subject coverage
+
 use strict;
 
 # Filter Blast output:

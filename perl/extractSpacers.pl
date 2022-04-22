@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Extract spacers with evidence code 4 from CRISPRCasFinder results
 use strict;
 
 my $S = $ARGV[0] || "sp"; # or dr or flank

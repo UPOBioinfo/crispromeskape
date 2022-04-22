@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Create gene presence/absence matrix
+
 use strict;
 
 my $F = $ARGV[0] || "roary/ab2/clustered_proteins";

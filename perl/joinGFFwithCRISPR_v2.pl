@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Prepare contigs from each genome as a string of gene names
+
 use strict;
 
 my $F = $ARGV[0] || "/mnt/data/research/aba";

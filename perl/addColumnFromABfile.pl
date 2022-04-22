@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Create an output to add to the metadata table, from a file with 2 columns: metadata ID.
 use strict;
 
 my ($F, $f) = @ARGV; # File with all IDs in the first colum (only IDs that we want; ./prokka/mapping_ids.tsv), and file with 2 columns: ID & Metadata
