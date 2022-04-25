@@ -48,6 +48,7 @@ for s in species:
     data_joined = data.join(meta)
     data_joined["CRISPRtype"] = data_joined["CRISPRtype"].fillna("No_crispr") 
     # loop over subtypes
+    accs_df = pd.DataFrame(columns=crispr_sub, index=["avg Accuracy"])
     for sub in crispr_sub:
 
         targets = [sub, "No_crispr"]
@@ -60,6 +61,7 @@ for s in species:
             [0] * len(data_matrix.columns), index=data_matrix.columns)
         all_dem_features_dropped = pd.DataFrame(
             [0] * len(data_matrix.columns), index=data_matrix.columns)
+        accs = []
         for r in range(iters):
             random_state = rd.randint(0, 1000)
             # start with base rf, insert grid/random search at some point.
@@ -87,8 +89,10 @@ for s in species:
             # metrics
             # confusion_matrix(Y_train, y_predicted_train)
             # confusion_matrix(Y_test, y_predicted_test)
-            # accuracy_score(Y_test, y_predicted_test)
-
+            accs.append(accuracy_score(Y_test, y_predicted_test))
+        
+        # save accuracy
+        accs_df[sub] = sum(accs)/iters
         # add foldchange and difference between respective crispr subtype groups and no_crispr
         all_dem_features.columns = ["known_genes_retained"]
         feature_importance_output = all_dem_features
@@ -100,5 +104,6 @@ for s in species:
         # save feature overview
         feature_importance_output.sort_values(["known_genes_retained"], ascending=False).to_csv(
             "output/{}_selected_features_top30_{}_of_{}_iters.csv".format(s, sub, iters))
-        
+    # save accs 
+    accs_df.to_csv("output/avg_accuracy_{}_{}_iters.csv".format(s, iters))
 # %%
