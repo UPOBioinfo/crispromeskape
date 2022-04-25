@@ -56,6 +56,9 @@ Extract spacers with evidence code 4 from CRISPRCasFinder results.
 **filterBlast_vs_db.pl**  
 Filter Blast hits with a given identity and subject coverage.
 
+**filter_spacers_vsall.pl**  
+Filter the results obtained from the comparison of spacers with different databases
+
 **getGroupsFromPangenome.pl**  
 Count appearances of each gene in the pangenome.
 
