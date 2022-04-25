@@ -1,11 +1,10 @@
-# crispromeskape
+# CRISPRomESKAPE
 
 ### Scripts for the paper "An outstanding bacterial membranome requires CRISPR-Cas systems to avoid the intervention of phages"
 
--- add doi of arXiv
+-- DOI BioRxiv
 
-Add some text to describe the project. 
-
+In this project we have searched for genes associated with CRISPR-Cas systems from bacteria of the ESKAPE group using Random Forest and we have been able to reduce the percentage of CRISPR black matter, as well as to propose a triad 'Membrane Proteins - Phages - CRISPR' by which bacterial genomes would acquire CRISPR-Cas systems when they have certain useful membrane proteins that can act as viral receptors.
 
 ## Python scripts
 Package versions:
