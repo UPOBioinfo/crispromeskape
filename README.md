@@ -47,6 +47,9 @@ Create matrix for heatmaps comparing genes vs genomes.
 **createMatrixPresenceAbsence.pl**  
 Create gene presence/absence matrix.
 
+**delete_FP.pl**  
+Identify false positives by comparing spacers and direct repeats
+
 **extractSpacers.pl**  
 Extract spacers with evidence code 4 from CRISPRCasFinder results.
 
