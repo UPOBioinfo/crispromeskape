@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Count appearances of each gene in the pangenome
+
 use strict;
 
 my $C  = $ARGV[0] || "roary/ab2/clustered_proteins";

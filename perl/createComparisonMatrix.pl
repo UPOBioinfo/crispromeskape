@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Create matrix for heatmaps comparing genes vs genomes
+
 use strict;
 
 my $G1 = $ARGV[0] || "pan_omp_9090.id";

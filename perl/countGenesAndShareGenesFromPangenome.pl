@@ -2,6 +2,7 @@
 # countGenesAndShareGenesFromPangenome.pl
 # AJPerez, 29/06/2021
 # Inputs: clusters from Roary, and I (number of times the IQR)
+# Count genes and average number of shared genes for each genome in the pangenome
 
 use strict;
 use Statistics::Descriptive;

@@ -10,7 +10,7 @@ type <- "if"
 #MIN_STRAIN <- 1 # 33% (ab=400; pa=829 si ifs_only) ifa=111; ifb=303 i=1184 if=940
 CLUSTERS <- 2 # 5 con pa, 2 con ab
 
-setwd(paste0("/home/ajperez/Nextcloud/ncbidatasets/", sp))
+setwd(paste0("./", sp))
 FILE <- paste0("max/gnmatrix_", sp, ".tsv") # for memory RAM free: _membrane_omp.tsv <--------------------##############3
 METADATA <- paste0("max/metadata_", sp, "_def.tsv") # metadata_crispr.tsv _def_extended.tsv #<-------
 GENES <- paste0("membrane_omp_", type, ".id") # <---------- ###################3 vir_phages.id ifab_mlst_-07_07.id mbocps_ifa_st79_-03_03.id pan_omp_9090.id membrane.id pan_biofilm_9090.id signalp_ab.id conjugation.id plasmid.id 
@@ -23,16 +23,13 @@ CLUSTERING <- "FALSE" # Row clustering
 mapping <- read.csv(paste0("roary/", sp, "2/pangenome_references_", sp, "_uniprot_bacteria_go.tsv"), sep = "\t", header = T)[,1:2]
 
 # Matrix and Metadata
-#gnmatrix <- as.matrix(read.csv(FILE, header = T, sep = '\t', row.names = 1))
+gnmatrix <- as.matrix(read.csv(FILE, header = T, sep = '\t', row.names = 1))
 metadata <- read.csv(METADATA, sep = "\t", header = T, row.names = 1)
 #metadata <- metadata[,c(2:5,8:8)] #<---------
 metadata <- metadata[,c(1,2)]
 
-#metadatag <- read.csv("signalp_ab.tsv", sep = "\t", header = F, row.names = 1)
-#colnames(metadatag) <- "SignalP"     
 #metadatag <- read.csv("pangenome_annotations.tsv", sep = "\t", header = T, row.names = 1) #<-------
 #metadatag <- metadatag[,c(1:3,6)] #<---------
-#colnames(metadatag) <- "SignalP"
 
 # Filter by genes
 virus <- readLines(VIRUS)
@@ -74,10 +71,7 @@ metadata2 <- metadata2[,c(3,2,1)]
 p2 <- pheatmap(gnmatrix2, show_rownames = F, show_colnames = T, treeheight_col = 0, legend = F, angle_col = 90,
                cluster_rows = T, cex = 1, treeheight_row = 0, annotation_row = metadata2, #annotation_col = metadatag, # <-------
                fontsize = 8, color = c("#F9F2EA", "#804AD5"), cutree_rows = CLUSTERS)
-#print(p2)
 
 tiff(paste0("/home/ajperez/Documentos/Articulos/CRISRPRomESKAPE/Figures/heatmap_", sp, "_", type, ".tif"), width = 6, height = 6, units = "in", compression = "lzw", res = 300)
-#svg(paste0("/home/ajperez/Documentos/Articulos/CRISRPRomESKAPE/Figures/heatmap_", sp, "_", type, "svg"), width = 6, height = 6)
 print(p2)
 dev.off()
-#save(p2, file = paste0("/home/ajperez/Documentos/Articulos/CRISRPRomESKAPE/Figures/heatmap_", sp, "_", type, ".rdata"))

@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Modify gene names assigned by Sma3s to avoid redundant names
+
 use strict;
 
 my $AB = $ARGV[0] || "ab";

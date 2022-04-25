@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Calculate proportions of genomes with unique spacer/phages in two different clusters
 use strict;
 
 my $SP = $ARGV[0] || "ab";
@@ -67,7 +69,7 @@ close in;
 my %spacers; # all spacers
 my %sp; # spacers by cluster
 my %spref; # references by cluster
-open in, "alex/spacers_vsall_$SP.tsv";
+open in, "spacers_vsall_$SP\_95.tsv"; # if we remove _95, 90% is taken
 while (<in>) {
   chomp;
 

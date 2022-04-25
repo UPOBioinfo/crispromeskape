@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+# AJPerez, 2022
+# Calculate both absolute and relative frequency of pangenome genes in two clusters of genomes
+
 use strict;
 
 my $G1 = $ARGV[0]; # File 1

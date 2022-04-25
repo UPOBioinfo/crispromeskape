@@ -1,15 +1,13 @@
-# AJPerez, 2022
 library(tidyverse)
 library(ggplot2)
 library(RColorBrewer)
 library(ggpubr)
 
-setwd("/home/ajperez/Documentos/Articulos/CRISRPRomESKAPE/")
+setwd("./")
 fig <- list()
 
 for (PRE in c("ab_ifa", "ab_ifb", "ec_if", "ef_iia", "kp_ie", "pa_if", "pa_ie", "pa_ic", "sa_iiia", "kp_iva3", "pa_iva1")) {
-
-  df <- read.table(paste0("/home/ajperez/Nextcloud/ncbidatasets/", PRE, "_0_suppl.tsv"), header = T, nrows = 5)
+  df <- read.table(paste0("./", PRE, "_0_suppl.tsv"), header = T, nrows = 5)
   df$Strains <- factor(df$Strains, level = df$Strains)
 
   label1 <- paste0("Cluster 1\n(", sum(df$cluster_1), ")")
@@ -53,3 +51,21 @@ print(out)
 tiff("Figures/fig5.tiff", width = 14, height = 9, units = "in", compression = "lzw", res = 300)
 print(out)
 dev.off()
+
+exit()
+
+ggarrange(fig[["kp_ie"]], fig[["ab_ifa"]], fig[["ab_ifb"]],
+          fig[["pa_ic"]], fig[["pa_ie"]], fig[["pa_if"]],
+          labels = c(
+            "K. pneumoniae (I-E)", "A. baumannii (I-Fa)", "A. baumannii (I-Fb)", 
+            "P. aeruginosa (I-C)", "P. aeruginosa (I-E)", "P. aeruginosa (I-F)"
+          ), vjust = 0.7, hjust = -0.1,
+          font.label = list(size = 14, color = "#000276", face = c("bold.italic")), nrow = 2, ncol = 3)
+
+ggarrange(fig[["ec_if"]], fig[["ef_iia"]], fig[["sa_iiia"]],
+          fig[["kp_iva3"]], fig[["pa_iva1"]],
+          labels = c(
+            "E. cloacae (I-F)", "E. faecium (II-A)", "S. aureus (III-A)", 
+            "K. pneumoniae (IV-A3)", "P. aeruginosa (IV-A1)"
+          ), vjust = 0.7, hjust = -0.1,
+          font.label = list(size = 14, color = "#000276", face = c("bold.italic")), nrow = 2, ncol = 3)
