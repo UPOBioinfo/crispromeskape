@@ -59,6 +59,9 @@ Filter Blast hits with a given identity and subject coverage.
 **filter_spacers_vsall.pl**  
 Filter the results obtained from the comparison of spacers with different databases
 
+**find_cluster_cas.pl**  
+Find cas gene cluster from ccfinder results
+
 **getGroupsFromPangenome.pl**  
 Count appearances of each gene in the pangenome.
 
