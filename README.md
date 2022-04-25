@@ -68,7 +68,7 @@ Count appearances of each gene in the pangenome.
 **joinGFFwithCRISPR_v2.pl**  
 Prepare contigs from each genome as a string of gene names.
 
-**phage_vs_spacers.pl.pl**  
+**phage_vs_spacers.pl**  
 Compare a list of spacers against a phages database.
 
 **putSma3sGenenames2roaryClusters.pl**  
