@@ -35,6 +35,9 @@ Calculate proportions of genomes with unique spacer/phages in two different clus
 **calculatePercentGenesInStrainsID.pl**  
 Calculate both absolute and relative frequency of pangenome genes in two clusters of genomes.
 
+**collectGFFMetadata.pl**  
+Collect all the information of the different strains and groups them in a final table
+
 **countGenesAndShareGenesFromPangenome.pl**  
 Count genes and average number of shared genes for each genome in the pangenome.
 
