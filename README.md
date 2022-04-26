@@ -1,11 +1,10 @@
-# crispromeskape
+# CRISPRomESKAPE
 
 ### Scripts for the paper "An outstanding bacterial membranome requires CRISPR-Cas systems to avoid the intervention of phages"
 
--- add doi of arXiv
+-- DOI BioRxiv
 
-Add some text to describe the project. 
-
+In this project we have searched for genes associated with CRISPR-Cas systems from bacteria of the ESKAPE group using Random Forest and we have been able to reduce the percentage of CRISPR black matter, as well as to propose a triad 'Membrane Proteins - Phages - CRISPR' by which bacterial genomes would acquire CRISPR-Cas systems when they have certain useful membrane proteins that can act as viral receptors.
 
 ## Python scripts
 Package versions:
@@ -35,6 +34,9 @@ Calculate proportions of genomes with unique spacer/phages in two different clus
 **calculatePercentGenesInStrainsID.pl**  
 Calculate both absolute and relative frequency of pangenome genes in two clusters of genomes.
 
+**collectGFFMetadata.pl**  
+Collect all the information of the different strains and groups them in a final table
+
 **countGenesAndShareGenesFromPangenome.pl**  
 Count genes and average number of shared genes for each genome in the pangenome.
 
@@ -44,17 +46,29 @@ Create matrix for heatmaps comparing genes vs genomes.
 **createMatrixPresenceAbsence.pl**  
 Create gene presence/absence matrix.
 
+**delete_FP.pl**  
+Identify false positives by comparing spacers and direct repeats
+
 **extractSpacers.pl**  
 Extract spacers with evidence code 4 from CRISPRCasFinder results.
 
 **filterBlast_vs_db.pl**  
 Filter Blast hits with a given identity and subject coverage.
 
+**filter_spacers_vsall.pl**  
+Filter the results obtained from the comparison of spacers with different databases
+
+**find_cluster_cas.pl**  
+Find cas gene cluster from ccfinder results
+
 **getGroupsFromPangenome.pl**  
 Count appearances of each gene in the pangenome.
 
 **joinGFFwithCRISPR_v2.pl**  
 Prepare contigs from each genome as a string of gene names.
+
+**phage_vs_spacers.pl**  
+Compare a list of spacers against a phages database.
 
 **putSma3sGenenames2roaryClusters.pl**  
 Modify gene names assigned by Sma3s to avoid redundant names.
