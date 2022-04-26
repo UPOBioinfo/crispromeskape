@@ -22,7 +22,7 @@ filenames = ["data paper/" + f for f in listdir("data paper/")
 
 # %%
 iters = 20
-species = ["_ec",  "_ef", "_ab", "_kp", "_pa", "_sa"]
+species = ["_ec", "_ef", "_ab", "_kp", "_pa", "_sa"]
 # loop over species
 for s in species:
     # load data and metadata
