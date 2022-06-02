@@ -17,8 +17,11 @@ from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve, accuracy
 
 # %%
 # # data files
-filenames = ["data paper/" + f for f in listdir("data paper/")
-             if isfile(join("data paper/", f))]
+filenames_data = ["data paper/gnmatrix/" + f for f in listdir("data paper/gnmatrix/")
+             if isfile(join("data paper/gnmatrix/", f))]
+filenames_meta = ["data paper/metadata files/" + f for f in listdir("data paper/metadata files/")
+             if isfile(join("data paper/metadata files/", f))]
+
 
 # %%
 iters = 20
@@ -26,12 +29,12 @@ species = ["_ec", "_ef", "_ab", "_kp", "_pa", "_sa"]
 # loop over species
 for s in species:
     # load data and metadata
-    file_data = [file_data for file_data in filenames if s in file_data and "gnmatrix" in file_data][0]
+    file_data = [file_data for file_data in filenames_data if s in file_data and "gnmatrix" in file_data][0]
     data = pd.read_csv(file_data, compression='infer', sep="\t")
     data = data.set_index("#genes/strains")
     data = data.T  # long format
     file_meta = [
-        file_meta for file_meta in filenames if s in file_meta and "metadata" in file_meta][0]
+        file_meta for file_meta in filenames_meta if s in file_meta and "metadata" in file_meta][0]
     meta = pd.read_csv(file_meta, compression='infer', sep="\t")
     meta = meta.set_index("ID")
 

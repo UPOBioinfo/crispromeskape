@@ -34,7 +34,7 @@ fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 12))
 for s, ax in zip(species, axs.ravel()):
     print(s)
     name = names[s]
-    file_meta = "data paper/metadata_{}_def_brief.tsv".format(s)
+    file_meta = "data paper/metadata files/metadata_{}_def_brief.tsv".format(s)
     meta = pd.read_csv(file_meta, compression='infer', sep="\t", engine='c')
     meta = meta.set_index("ID")
     # dorp ambigous
