@@ -17,12 +17,13 @@ from os import listdir
 from os.path import isfile, join
 import scipy.stats as st
 from sklearn.metrics import pairwise_distances
-from scipy.cluster.hierarchy import linkage, dendrogram
+from scipy.cluster.hierarchy import linkage, dendrogram, set_link_color_palette
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 from matplotlib import colors
 from scipy.stats import spearmanr, kendalltau, pearsonr
 
+# %%
 # cores for jaccard index 
 n_cores = 6
 # function to drop prefixes of MLST groups in 
@@ -140,7 +141,8 @@ for idx, s in enumerate(species):
     unique_combis_local = ["No_crispr"] + unique_combis_local
     unique_combis_local = {unique_combis_local[i]:i for i in range(len(unique_combis_local))}
     # my_palette = colors.ListedColormap(colors_rgb[1:len(unique_combis)+1])
-
+    # make tree black
+    set_link_color_palette(['black'])
     _linkages = ['ward']
     labellist = ["{:>35}".format(l) for l in data_MLST.index.to_list()]
     for _linkage in _linkages:
@@ -153,8 +155,10 @@ for idx, s in enumerate(species):
                     distance_sort='descending',
                     show_leaf_counts=True, 
                     labels=labellist, 
+                    above_threshold_color='black',
                     ax=ax)
-
+            # increase size for x-axis
+            ax.tick_params(axis='x', labelsize=16, rotation=45)
             # Apply the right color to each label
             ylbls = ax.get_ymajorticklabels()
             for lbl in ylbls:
@@ -213,8 +217,11 @@ for idx, s in enumerate(species):
                     leaf_rotation=0,
                     distance_sort='descending',
                     show_leaf_counts=True,
-                    labels=labellist, 
+                    labels=labellist,
+                    above_threshold_color='black',
                     ax=ax)
+            # increase size for x-axis
+            ax.tick_params(axis='x', labelsize=16, rotation=45)
 
             # Apply the right color to each label
             # ax = plt.gca()
@@ -230,20 +237,20 @@ for idx, s in enumerate(species):
             # legend_elements = [Patch(facecolor=my_palette(
             #     unique_combis[key]), label=key) for key in unique_combis_local.keys()]
             # ax.legend(handles=legend_elements, loc='upper left')
-            #plt.show()
-
+            # plt.show()
+# %%
 for ax, col in zip(axs[1], species):
-    ax.set_title("$\it{}$".format(names[col]), size='xx-large')
+    ax.set_title("$\it{}$".format(names[col]), size='25', pad=30)
 
 for ax, row in zip(axs[:,0], ["Phylogeny (MLST)", "Gene profile"]):
-    ax.set_ylabel(row, rotation=90, size='xx-large')
+    ax.set_ylabel(row, rotation=90, size='25')
 # apply legend for all unique elements
 legend_elements = [Patch(facecolor=my_palette(
                 unique_combis[key]), label=key) for key in unique_combis.keys()]
-axs[0, 0].legend(handles=legend_elements, loc='lower left')
+axs[0, 0].legend(handles=legend_elements, loc='lower left', fontsize='x-large')
 
-fig.savefig("output/fig_supplTrees.png".format(s, _linkage), dpi=300)
-fig.savefig("output/fig_supplTrees.svg".format(s, _linkage), dpi=300)
-fig.savefig("output/fig_supplTrees.tiff".format(s, _linkage), dpi=300)
+fig.savefig("output/fig_supplTrees.png", dpi=600)
+fig.savefig("output/fig_supplTrees.svg", dpi=600)
+fig.savefig("output/fig_supplTrees.tiff", dpi=600)
 # save correls
 correls.to_csv("output/correlations.csv")
