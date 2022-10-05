@@ -28,6 +28,8 @@ names = {
 species = ["ef", "sa", "kp", "ab", "pa", "ec"]
 correls = pd.DataFrame(
     index=["pearson", "spearman", "kendall"], columns=species)
+pvals = pd.DataFrame(
+    index=["pearson", "spearman", "kendall"], columns=species)
 # %%
 
 fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 12))
@@ -70,7 +72,7 @@ for s, ax in zip(species, axs.ravel()):
     _kendalltau = kendalltau(ab_jaccard_distance_flat,
                              ab_phylogenic_distance_flat)
     correls[s] = [_pearsonr[0], _spearmanr[0], _kendalltau[0]]
-
+    pvals[s]  = [_pearsonr[1], _spearmanr[1], _kendalltau[1]]
     # the block below does some cosmetics on the crispr names
     # If multiple are present they are split into a list of strings
     # Ambigous strains need to be dropped as in the jaccard script.
@@ -130,13 +132,14 @@ for s, ax in zip(species, axs.ravel()):
                 )
     ax.set_ylabel("Gene profile distance")
     ax.set_xlabel("Phylogenetic distance")
-    ax.set_title("$\it{}$ (corr = {})".format(name, np.round(_pearsonr[0], 2)))
+    ax.set_title("$\it{}$ (corr = {}, p = {})".format(name, np.round(_pearsonr[0], 2), np.round(_pearsonr[1], 4)))
     # fig.savefig("output/{}_jacc-vs-phylo-lmplot-linear.svg".format(s))
 
 handles = [Patch(color=sns_palette[key], label=key) for key in sns_palette.keys()]
 axs[1, 2].legend(handles=handles, loc="lower right")
-fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.png", dpi=300)
-fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.tiff", dpi=300)
+# fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.png", dpi=600)
+fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.svg", dpi=600)
+# fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.tiff", dpi=600)
 fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.pdf")
 
 print("finished")
