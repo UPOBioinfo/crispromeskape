@@ -2,6 +2,11 @@ http://www.bioinfocabd.upo.es/crispromeskape/X/pangenome_references_X_uniprot_ba
 http://www.bioinfocabd.upo.es/crispromeskape/X/clustered_proteins
 http://www.bioinfocabd.upo.es/crispromeskape/X/pangenome_references_X.fasta
 http://www.bioinfocabd.upo.es/crispromeskape/X/pangenome_vs_alldb_X.tsv
+http://www.bioinfocabd.upo.es/crispromeskape/X/ref_X_phigaro.fasta
+
+List of phages used in Figure 6:
+
+http://www.bioinfocabd.upo.es/crispromeskape/phagues_figure6.fasta 
 
 If you want to download these files change X for abbrevation name (ab,ec,ef,kp,sa,pa):
 
