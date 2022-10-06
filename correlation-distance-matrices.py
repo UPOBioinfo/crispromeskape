@@ -139,7 +139,7 @@ handles = [Patch(color=sns_palette[key], label=key) for key in sns_palette.keys(
 axs[1, 2].legend(handles=handles, loc="lower right")
 # fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.png", dpi=600)
 fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.svg", dpi=600)
-# fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.tiff", dpi=600)
+fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.tiff", dpi=600)
 fig.savefig("output/panel_jacc-vs-phylo-lmplot-linear.pdf")
 
 print("finished")
