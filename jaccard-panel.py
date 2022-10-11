@@ -141,8 +141,8 @@ for idx, s in enumerate(species):
     unique_combis_local = ["No_crispr"] + unique_combis_local
     unique_combis_local = {unique_combis_local[i]:i for i in range(len(unique_combis_local))}
     # my_palette = colors.ListedColormap(colors_rgb[1:len(unique_combis)+1])
-    # make tree black
-    set_link_color_palette(['black'])
+    # make tree darkgrey
+    set_link_color_palette(['darkgrey'])
     _linkages = ['ward']
     labellist = ["{:>35}".format(l) for l in data_MLST.index.to_list()]
     for _linkage in _linkages:
@@ -155,7 +155,7 @@ for idx, s in enumerate(species):
                     distance_sort='descending',
                     show_leaf_counts=True, 
                     labels=labellist, 
-                    above_threshold_color='black',
+                       above_threshold_color='darkgrey',
                     ax=ax)
             # increase size for x-axis
             ax.tick_params(axis='x', labelsize=16, rotation=45)
@@ -218,7 +218,7 @@ for idx, s in enumerate(species):
                     distance_sort='descending',
                     show_leaf_counts=True,
                     labels=labellist,
-                    above_threshold_color='black',
+                    above_threshold_color='darkgrey',
                     ax=ax)
             # increase size for x-axis
             ax.tick_params(axis='x', labelsize=16, rotation=45)
